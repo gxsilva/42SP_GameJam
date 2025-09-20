@@ -8,7 +8,7 @@ var is_attacking := false
 @onready var animation = $AnimatedSprite2D as AnimatedSprite2D
 
 func _ready():
-	animation.animation_finished.connect(_on_animation_finished)
+	animation.animation_finished.connect(_on_animated_sprite_2d_animation_finished)
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -49,6 +49,5 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _on_animation_finished(anim_name: String) -> void:
-	if anim_name == "attack":
-		is_attacking = false
+func _on_animated_sprite_2d_animation_finished() -> void:
+	is_attacking = false
