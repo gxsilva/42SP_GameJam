@@ -25,7 +25,7 @@ region = Rect2(128, 256, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dt7fs"]
 atlas = ExtResource("2_g2els")
-region = Rect2(160, 256, 32, 32)
+region = Rect2(162, 256, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
 atlas = ExtResource("2_g2els")
