@@ -56,7 +56,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4r1p"]
 size = Vector2(17, 10)
 
-[node name="toto" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -64,7 +64,7 @@ position = Vector2(-1.90735e-06, 0)
 scale = Vector2(0.0271619, 0.0271619)
 sprite_frames = SubResource("SpriteFrames_ur7pv")
 autoplay = "default"
-frame_progress = 0.44338
+frame_progress = 0.293341
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
