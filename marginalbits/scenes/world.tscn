@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c3yhsl2wva0n6"]
+[gd_scene load_steps=25 format=3 uid="uid://c3yhsl2wva0n6"]
 
 [ext_resource type="Texture2D" uid="uid://c6odbdtbooyhj" path="res://assets/Cave Tileset/Brown_Tile_Terrain (16 x 16).png" id="1_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://cywl8mpsm88vw" path="res://assets/Cave Tileset/Gray_Tile_Terrain (16 x 16).png" id="2_k0juu"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://ca46ecwsdaw6c" path="res://prefabs/fire.tscn" id="15_xo05s"]
 [ext_resource type="PackedScene" uid="uid://codtnnyg672ai" path="res://scenes/killzone.tscn" id="16_dss4m"]
 [ext_resource type="PackedScene" uid="uid://in13hdpfgr3u" path="res://scenes/hud.tscn" id="18_lakw3"]
+[ext_resource type="PackedScene" uid="uid://ecb8v31yn3ii" path="res://scenes/enemy.tscn" id="19_pm21f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfnet"]
 texture = ExtResource("1_4wyf3")
@@ -731,5 +732,5 @@ shape = SubResource("WorldBoundaryShape2D_7t5mc")
 
 [node name="HUD" parent="." instance=ExtResource("18_lakw3")]
 
-[node name="fire3" parent="." instance=ExtResource("15_xo05s")]
-position = Vector2(210, 508)
+[node name="Enemy" parent="." instance=ExtResource("19_pm21f")]
+position = Vector2(326, 516)
