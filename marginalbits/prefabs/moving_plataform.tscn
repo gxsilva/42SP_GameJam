@@ -19,5 +19,6 @@ region_enabled = true
 region_rect = Rect2(167, 163, 18, 14)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platform"]
+light_mask = 2
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_kielb")
