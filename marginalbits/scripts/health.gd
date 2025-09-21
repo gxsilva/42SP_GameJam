@@ -3,7 +3,7 @@ extends Node
 signal damaged(amount, from)
 signal died()
 
-@export var max_hp := 3
+@export var max_hp := 4
 var hp := 0
 
 func _ready() -> void:
