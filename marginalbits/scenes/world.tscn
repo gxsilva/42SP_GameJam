@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bncg8jt0x1p8h" path="res://assets/Parallax Cave/Parallax Cave/dark_node_parallax.png" id="14_pm21f"]
 [ext_resource type="PackedScene" uid="uid://ca46ecwsdaw6c" path="res://prefabs/fire.tscn" id="15_xo05s"]
 [ext_resource type="PackedScene" uid="uid://codtnnyg672ai" path="res://scenes/killzone.tscn" id="16_dss4m"]
-[ext_resource type="PackedScene" uid="uid://crwp46jj3h1n1" path="res://scenes/hud.tscn" id="18_lakw3"]
+[ext_resource type="PackedScene" uid="uid://in13hdpfgr3u" path="res://scenes/hud.tscn" id="18_lakw3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfnet"]
 texture = ExtResource("1_4wyf3")
@@ -730,3 +730,6 @@ position = Vector2(130, 767)
 shape = SubResource("WorldBoundaryShape2D_7t5mc")
 
 [node name="HUD" parent="." instance=ExtResource("18_lakw3")]
+
+[node name="fire3" parent="." instance=ExtResource("15_xo05s")]
+position = Vector2(210, 508)

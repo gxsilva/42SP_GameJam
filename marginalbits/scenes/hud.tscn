@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://crwp46jj3h1n1"]
+[gd_scene load_steps=3 format=3 uid="uid://in13hdpfgr3u"]
 
-[ext_resource type="Script" uid="uid://b1ct8lgrhnq5d" path="res://scripts/hud.gd" id="1_oo0fn"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_oo0fn"]
 [ext_resource type="Texture2D" uid="uid://dqlyclufwetti" path="res://assets/sprites/red_heart.png" id="2_5ysmq"]
 
 [node name="HUD" type="CanvasLayer"]

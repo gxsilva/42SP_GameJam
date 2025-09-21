@@ -250,7 +250,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ni07")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 9.0
 }, {
@@ -314,10 +314,8 @@ script = ExtResource("1_g2els")
 position = Vector2(-4.76837e-07, 4.76837e-07)
 scale = Vector2(0.86277, 0.86277)
 sprite_frames = SubResource("SpriteFrames_fjrip")
-animation = &"hit"
+animation = &"jump"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

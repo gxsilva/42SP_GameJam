@@ -27,6 +27,7 @@ func _on_damaged(amount: int, from: Node) -> void:
 	if is_hurt:
 		return
 	is_hurt = true
+	is_attacking = false
 	if animation.animation != "hit":
 		animation.play("hit")
 	# não mexa em animation.frame aqui
