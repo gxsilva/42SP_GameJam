@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1lf3ratm531w"]
+
+[ext_resource type="Script" uid="uid://j38sl1spp53f" path="res://scripts/dialog_box.gd" id="1_kxkgd"]
+[ext_resource type="Texture2D" uid="uid://jccj5f1tpsrq" path="res://Border All 9.png" id="2_v0qdq"]
+[ext_resource type="Texture2D" uid="uid://cpjosdls4m8fx" path="res://assets/button_frame0.png" id="3_caxlw"]
+[ext_resource type="FontFile" uid="uid://cvy6dasr7kmpu" path="res://assets/fonts/Minecraft.ttf" id="3_v0qdq"]
+[ext_resource type="Texture2D" uid="uid://ubqg375hhf2g" path="res://assets/button_frame1.png" id="4_kdl02"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_dfgu0"]
+frames = 2
+speed_scale = 2.0
+frame_0/texture = ExtResource("3_caxlw")
+frame_1/texture = ExtResource("4_kdl02")
+frame_1/duration = 1.0
+
+[node name="dialog_box" type="MarginContainer"]
+process_mode = 3
+anchors_preset = -1
+anchor_left = 0.459
+anchor_top = 0.432
+anchor_right = 0.539
+anchor_bottom = 0.568
+offset_left = 0.231995
+offset_top = 0.0639954
+offset_right = 0.0719604
+offset_bottom = -0.0640259
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kxkgd")
+
+[node name="bg_dialog_box" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_v0qdq")
+region_rect = Rect2(256.919, 448.83, 62.2232, 62.3044)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="text_container" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="text_label" type="Label" parent="text_container"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v0qdq")
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 2
+
+[node name="indicator" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = SubResource("AnimatedTexture_dfgu0")
