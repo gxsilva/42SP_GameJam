@@ -7,10 +7,13 @@ extends CharacterBody2D
 @export var max_health: int = 2
 @export var knockback_force: float = 200.0
 @export var hit_flash_time: float = 0.2
-
-# NOVOS: cooldown do ataque e atraso do primeiro hit (opcional)
+# ATAQUE
 @export var attack_cooldown: float = 2.0
 @export var first_attack_delay: float = 0.25
+# GRAVIDADE
+@export var use_project_gravity: bool = true
+@export var custom_gravity: float = 980.0  # usado se use_project_gravity == false
+@export var terminal_velocity: float = 2000.0
 
 var left_limit: float
 var right_limit: float
@@ -19,12 +22,12 @@ var patrol_direction: int = 1
 var chasing: bool = false
 var player_ref: Node2D = null
 var current_health: int
-var hit_timer: float = 0
+var hit_timer: float = 0.0
 
-# Agora guardamos o cooldown restante por alvo (body -> cooldown_restante)
-var _targets_cd: Dictionary = {} 
+# cooldown por alvo
+var _targets_cd: Dictionary = {}
 
-@onready var anim = $AnimatedSprite2D
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready():
 	left_limit = global_position.x - patrol_distance
@@ -32,28 +35,28 @@ func _ready():
 	current_health = max_health
 
 func _physics_process(delta):
-	# ===== Flash de dano =====
+	# ====== FLASH DE DANO ======
 	if hit_timer > 0.0:
 		hit_timer -= delta
 		anim.modulate = Color(1, 0, 0)
 	else:
 		anim.modulate = Color(1, 1, 1)
 
-	# Se estiver em "hit stun", não mover
+	# ====== GRAVIDADE ======
+	_apply_gravity(delta)
+
+	# Se estiver em "hit stun", só desliza com a física
 	if hit_timer > 0.0:
 		move_and_slide()
 		return
 
-	# ===== ATAQUE COM COOLDOWN POR ALVO =====
-	# Para cada corpo rastreado, contamos o cooldown e aplicamos dano quando possível
+	# ====== ATAQUE COM COOLDOWN POR ALVO ======
 	for body in _targets_cd.keys():
 		if not is_instance_valid(body):
 			_targets_cd.erase(body)
 			continue
 
 		_targets_cd[body] = max(0.0, float(_targets_cd[body]) - delta)
-
-		# Só ataca se estiver dentro do alcance
 		if body is Node2D:
 			var dist := global_position.distance_to((body as Node2D).global_position)
 			if dist <= attack_range and _targets_cd[body] <= 0.0:
@@ -62,28 +65,25 @@ func _physics_process(delta):
 					health.take_damage(attack_damage, self)
 				_targets_cd[body] = attack_cooldown
 
-	# ===== MOVIMENTO: PERSEGUIR OU PATRULHAR =====
+	# ====== MOVIMENTO (só altera X; Y fica por conta da gravidade) ======
 	if chasing and player_ref:
 		var distance = global_position.distance_to(player_ref.global_position)
 		if distance > attack_range:
-			# mover em direção ao player
-			var direction = (player_ref.global_position - global_position).normalized()
-			velocity = direction * speed
+			var dir = (player_ref.global_position - global_position).normalized()
+			velocity.x = dir.x * speed
 			if velocity.x > 0:
 				anim.play("run_right")
 			elif velocity.x < 0:
 				anim.play("run_left")
 		else:
-			# parar no lugar ao entrar no alcance de ataque (animação de ataque)
-			velocity = Vector2.ZERO
+			velocity.x = 0
 			if player_ref.global_position.x > global_position.x:
 				anim.play("attack_right")
 			else:
 				anim.play("attack_left")
 	else:
-		# patrulha
 		velocity.x = patrol_direction * speed
-		velocity.y = 0
+		# NUNCA zere velocity.y aqui — deixa a gravidade agir!
 		if patrol_direction > 0:
 			anim.play("walk_right")
 		else:
@@ -96,6 +96,12 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+func _apply_gravity(delta: float) -> void:
+	var g := custom_gravity
+	if use_project_gravity:
+		g = float(ProjectSettings.get_setting("physics/2d/default_gravity"))
+	velocity.y = clamp(velocity.y + g * delta, -terminal_velocity, terminal_velocity)
+
 func take_damage(amount: int, source_pos: Vector2) -> void:
 	current_health -= amount
 	print("Enemy takes %d damage! Current health: %d" % [amount, current_health])
@@ -103,7 +109,7 @@ func take_damage(amount: int, source_pos: Vector2) -> void:
 	# flash de hit
 	hit_timer = hit_flash_time
 
-	# knockback
+	# knockback (preserva Y acumulado pela gravidade depois)
 	var knockback_dir = (global_position - source_pos).normalized()
 	velocity = knockback_dir * knockback_force
 	
@@ -112,25 +118,27 @@ func take_damage(amount: int, source_pos: Vector2) -> void:
 
 func die() -> void:
 	print("Enemy died!")
-
-	# trava movimento e ataques
 	set_physics_process(false)
 	velocity = Vector2.ZERO
 	chasing = false
 
-	# toca animação certa
 	if player_ref and player_ref.global_position.x > global_position.x:
 		anim.play("death_right")
 	else:
 		anim.play("death_left")
+
 	$CollisionShape2D.set_deferred("disabled", true)
 
-	# quando animação acabar → remover inimigo
-	#anim.animation_finished.connect(_on_death_anim_finished, CONNECT_ONESHOT)
+	# Conectar one-shot para remover quando a animação de morte terminar
+	if not anim.is_connected("animation_finished", Callable(self, "_on_death_anim_finished")):
+		anim.animation_finished.connect(_on_death_anim_finished, CONNECT_ONE_SHOT)
+
+func _on_death_anim_finished():
+	if anim.animation.begins_with("death"):
+		queue_free()
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		# inicia com um pequeno atraso para não dar hit instantâneo
 		_targets_cd[body] = first_attack_delay
 		chasing = true
 		player_ref = body
