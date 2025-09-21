@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyopb3ygxhoqr"]
+[gd_scene load_steps=6 format=3 uid="uid://cjtb4mac7kdbt"]
 
 [ext_resource type="Texture2D" uid="uid://c3s4eyi54xyns" path="res://assets/Parallax/Forest/dark_forest_1.png" id="1_v5sxu"]
 [ext_resource type="Texture2D" uid="uid://dahst1ema84wx" path="res://assets/Parallax/Forest/dark_forest_2.png" id="2_nsc44"]

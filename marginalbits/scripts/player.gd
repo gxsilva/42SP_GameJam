@@ -2,62 +2,89 @@ extends CharacterBody2D
 
 const SPEED := 130.0
 const JUMP_VELOCITY := -300.0
-
-# Quanto de controle horizontal você tem enquanto ataca (0 = nenhum, SPEED = total)
-
 const ATTACK_CONTROL := 40.0
 
 var is_jumping := false
 var is_attacking := false
-var attack_hold_vx := 0.0   # armazena o momentum quando o ataque começa
-var facing := 1              # 1 = direita, -1 = esquerda
+var is_hurt := false
+var is_dead := false
+var attack_hold_vx := 0.0
+var facing := 1
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+@onready var health: Node = $Health
 
 func _ready() -> void:
-	pass
+	health.died.connect(_on_died)
+	health.damaged.connect(_on_damaged)
+	# Conecta UMA vez
+	animation.animation_finished.connect(_on_anim_finished)
+
+func _on_damaged(amount: int, from: Node) -> void:
+	if is_dead:
+		return
+	# Já está em hit? então não reinicia
+	if is_hurt:
+		return
+	is_hurt = true
+	is_attacking = false
+	if animation.animation != "hit":
+		animation.play("hit")
+	# não mexa em animation.frame aqui
+
+
+func _on_died() -> void:
+	if is_dead:
+		return
+	is_dead = true
+	is_attacking = false
+	is_hurt = false
+	animation.play("die")
+	set_physics_process(false)  # trava controles
+
+func _on_anim_finished() -> void:
+	match animation.animation:
+		"hit":
+			is_hurt = false
+		"attack":
+			is_attacking = false
+		"die":
+			get_tree().reload_current_scene()
 
 func _physics_process(delta: float) -> void:
-	# Gravidade
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Pulo
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and not is_dead and not is_hurt:
 		velocity.y = JUMP_VELOCITY
 		is_jumping = true
 	elif is_on_floor():
 		is_jumping = false
 
-	# Direção do input (sempre lemos, mesmo atacando)
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
 		facing = sign(direction)
 
-
-	# Ataque: iniciar
-
-	if Input.is_action_just_pressed("attack") and not is_attacking:
+	# Ataque só se não estiver hurt/dead
+	if Input.is_action_just_pressed("attack") and not is_attacking and not is_hurt and not is_dead:
 		is_attacking = true
-		attack_hold_vx = velocity.x   # guarda o embalo atual
+		attack_hold_vx = velocity.x
 		animation.play("attack")
+		animation.frame = 0
 
-	# Movimento horizontal
-	if is_attacking:
-		# Preserva o momentum e permite um pouco de controle
+	# Movimento
+	if is_dead:
+		velocity.x = 0
+	elif is_attacking:
 		var target := direction * SPEED
-		# move_toward aproxima aos poucos; ajuste ATTACK_CONTROL p/ mais ou menos controle
 		velocity.x = move_toward(attack_hold_vx, target, ATTACK_CONTROL * delta)
-		attack_hold_vx = velocity.x  # mantém atualizado durante o ataque
+		attack_hold_vx = velocity.x
 	else:
 		velocity.x = direction * SPEED
 
-	# Animações (não mudamos enquanto ataca)
-	if is_attacking:
-		# Só espelhamos/viramos, sem trocar a animação de "attack"
-		animation.scale.x = facing
-	else:
-		animation.scale.x = facing
+	# Animação (prioridade: die > hit > attack > locomotion)
+	animation.scale.x = facing
+	if not (is_dead or is_hurt or is_attacking):
 		if direction != 0:
 			if is_on_floor() and animation.animation != "run":
 				animation.play("run")
@@ -69,7 +96,3 @@ func _physics_process(delta: float) -> void:
 			animation.play("idle")
 
 	move_and_slide()
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if animation.animation == "attack":
-		is_attacking = false
