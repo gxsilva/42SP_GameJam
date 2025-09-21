@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://0fyjl0mj71vm"]
+[gd_scene load_steps=14 format=3 uid="uid://b6s68ysh4hmou"]
 
 [ext_resource type="Texture2D" uid="uid://c6odbdtbooyhj" path="res://assets/Cave Tileset/Brown_Tile_Terrain (16 x 16).png" id="1_dabdc"]
 [ext_resource type="Texture2D" uid="uid://cywl8mpsm88vw" path="res://assets/Cave Tileset/Gray_Tile_Terrain (16 x 16).png" id="2_cf55d"]
