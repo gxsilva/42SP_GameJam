@@ -1020,7 +1020,7 @@ offset_right = 282.0
 offset_bottom = 480.0
 theme_override_fonts/font = ExtResource("17_uwbj1")
 theme_override_font_sizes/font_size = 16
-text = "Movimentação"
+text = "Movimentos"
 
 [node name="Label2" type="Label" parent="TileMapLayer"]
 offset_left = 130.0

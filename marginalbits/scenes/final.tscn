@@ -728,7 +728,7 @@ shape = SubResource("WorldBoundaryShape2D_7t5mc")
 position = Vector2(349, 502)
 scale = Vector2(2.35, 2.35)
 patrol_distance = 75.0
-max_health = 1
+max_health = 15
 attack_cooldown = 1.5
 
 [node name="Label" type="Label" parent="."]
