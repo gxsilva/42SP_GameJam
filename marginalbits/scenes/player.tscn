@@ -317,7 +317,7 @@ script = ExtResource("1_g2els")
 position = Vector2(-4.76837e-07, 4.76837e-07)
 scale = Vector2(0.86277, 0.86277)
 sprite_frames = SubResource("SpriteFrames_fjrip")
-animation = &"jump"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

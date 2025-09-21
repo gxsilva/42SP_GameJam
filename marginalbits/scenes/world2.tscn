@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://wfrtquvvrheo"]
+[gd_scene load_steps=27 format=3 uid="uid://wfrtquvvrheo"]
 
 [ext_resource type="Texture2D" uid="uid://c6odbdtbooyhj" path="res://assets/Cave Tileset/Brown_Tile_Terrain (16 x 16).png" id="1_wsc7j"]
 [ext_resource type="Texture2D" uid="uid://cywl8mpsm88vw" path="res://assets/Cave Tileset/Gray_Tile_Terrain (16 x 16).png" id="2_gag4f"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://codtnnyg672ai" path="res://scenes/killzone.tscn" id="17_28u8c"]
 [ext_resource type="PackedScene" uid="uid://in13hdpfgr3u" path="res://scenes/hud.tscn" id="18_wws41"]
 [ext_resource type="PackedScene" uid="uid://ecb8v31yn3ii" path="res://scenes/enemy.tscn" id="19_r203s"]
+[ext_resource type="PackedScene" uid="uid://8ksv7d3vjfpl" path="res://scenes/goal.tscn" id="20_4c0pb"]
+[ext_resource type="PackedScene" uid="uid://6kpekja5d5su" path="res://scenes/final.tscn" id="21_eryfc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfnet"]
 texture = ExtResource("1_wsc7j")
@@ -788,3 +790,7 @@ position = Vector2(369, 560)
 position = Vector2(1152, 628)
 distance = 105
 move_horizontal = false
+
+[node name="Goal" parent="." instance=ExtResource("20_4c0pb")]
+position = Vector2(1378, 400)
+next_level = ExtResource("21_eryfc")
