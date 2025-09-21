@@ -573,7 +573,7 @@ texture = ExtResource("3_71j4m")
 1:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_7r4gi"]
-physics_layer_0/collision_layer = 2
+physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "cave_tile"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
@@ -596,7 +596,7 @@ layer_1/tile_data = PackedInt32Array(2031616, 262147, 10, 2031617, 327683, 10)
 
 [node name="Player" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(62, 230)
-collision_mask = 3
+collision_mask = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -30)
