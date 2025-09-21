@@ -9,38 +9,39 @@ var is_attacking := false
 var is_hurt := false
 var is_dead := false
 var attack_hold_vx := 0.0
+var attack_has_hit := false  # <- evita hits múltiplos por ataque
 var facing := 1
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health: Node = $Health
+@onready var attack_area: Area2D = $AttackArea
+@onready var attack_shape: CollisionShape2D = $AttackArea/CollisionShape2D
 
 func _ready() -> void:
 	health.died.connect(_on_died)
 	health.damaged.connect(_on_damaged)
-	# Conecta UMA vez
 	animation.animation_finished.connect(_on_anim_finished)
+	animation.frame_changed.connect(_on_frame_changed)
+
+	# AttackArea inicialmente desligada
+	attack_area.monitoring = false
+	attack_area.monitorable = true
+	attack_area.body_entered.connect(_on_attack_area_body_entered)
 
 func _on_damaged(amount: int, from: Node) -> void:
-	if is_dead:
-		return
-	# Já está em hit? então não reinicia
-	if is_hurt:
-		return
+	if is_dead or is_hurt: return
 	is_hurt = true
 	is_attacking = false
 	if animation.animation != "hit":
 		animation.play("hit")
-	# não mexa em animation.frame aqui
-
 
 func _on_died() -> void:
-	if is_dead:
-		return
+	if is_dead: return
 	is_dead = true
 	is_attacking = false
 	is_hurt = false
 	animation.play("die")
-	set_physics_process(false)  # trava controles
+	set_physics_process(false)
 
 func _on_anim_finished() -> void:
 	match animation.animation:
@@ -48,8 +49,37 @@ func _on_anim_finished() -> void:
 			is_hurt = false
 		"attack":
 			is_attacking = false
+			# garante que desliga a hitbox ao terminar
+			attack_area.monitoring = false
+			attack_has_hit = false
 		"die":
 			get_tree().reload_current_scene()
+
+func _on_frame_changed() -> void:
+	# ativa a hitbox só nos frames de impacto do ataque
+	if animation.animation == "attack":
+		# ajuste os frames conforme sua sprite (ex.: 1 e 2)
+		var f := animation.frame
+		var active := (f == 1 or f == 2)
+		attack_area.monitoring = active and is_attacking and not is_dead and not is_hurt
+
+		# posiciona a área à frente do personagem
+		var offset := 12.0  # ajuste conforme o alcance do golpe
+		attack_area.position.x = offset * facing
+		attack_area.position.y = 0
+
+	else:
+		# fora da animação de ataque, sempre desligada
+		attack_area.monitoring = false
+
+func _on_attack_area_body_entered(body: Node) -> void:
+	# só aplica uma vez por ataque
+	if not is_attacking or attack_has_hit: return
+
+	if body.is_in_group("enemy"):
+		if body.has_method("take_damage"):
+			body.take_damage(1, global_position)
+			attack_has_hit = true  # evita múltiplos hits nesse mesmo swing
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -65,9 +95,9 @@ func _physics_process(delta: float) -> void:
 	if direction != 0:
 		facing = sign(direction)
 
-	# Ataque só se não estiver hurt/dead
 	if Input.is_action_just_pressed("attack") and not is_attacking and not is_hurt and not is_dead:
 		is_attacking = true
+		attack_has_hit = false
 		attack_hold_vx = velocity.x
 		animation.play("attack")
 		animation.frame = 0

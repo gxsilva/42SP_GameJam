@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c0j10r7s0j3ve"]
+[gd_scene load_steps=44 format=3 uid="uid://c0j10r7s0j3ve"]
 
 [ext_resource type="Script" uid="uid://ntcqe7kfkrcu" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cfwknvqhma746" path="res://assets/sprites/AnimationSheet_Character.png" id="2_g2els"]
@@ -305,6 +305,9 @@ animations = [{
 radius = 5.0
 height = 24.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
+radius = 19.0263
+
 [node name="Player" type="CharacterBody2D" groups=["player", "players"]]
 position = Vector2(2, 0)
 collision_mask = 2
@@ -324,6 +327,11 @@ shape = SubResource("CapsuleShape2D_smehm")
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("3_qhqgy")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_qhqgy")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
