@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://codtnnyg672ai" path="res://scenes/killzone.tscn" id="16_dss4m"]
 [ext_resource type="PackedScene" uid="uid://crwp46jj3h1n1" path="res://scenes/hud.tscn" id="18_lakw3"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhx03"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfnet"]
 texture = ExtResource("1_4wyf3")
 1:1/0 = 0
 2:1/0 = 0
@@ -234,7 +234,7 @@ texture = ExtResource("1_4wyf3")
 29:20/0 = 0
 31:20/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o8fc1"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i7141"]
 texture = ExtResource("2_k0juu")
 1:1/0 = 0
 2:1/0 = 0
@@ -390,7 +390,7 @@ texture = ExtResource("2_k0juu")
 29:20/0 = 0
 31:20/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xo05s"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4mrxx"]
 texture = ExtResource("3_71j4m")
 9:1/0 = 0
 9:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -576,9 +576,9 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "cave_tile"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/1 = SubResource("TileSetAtlasSource_jhx03")
-sources/2 = SubResource("TileSetAtlasSource_o8fc1")
-sources/3 = SubResource("TileSetAtlasSource_xo05s")
+sources/1 = SubResource("TileSetAtlasSource_qfnet")
+sources/2 = SubResource("TileSetAtlasSource_i7141")
+sources/3 = SubResource("TileSetAtlasSource_4mrxx")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7t5mc"]
 

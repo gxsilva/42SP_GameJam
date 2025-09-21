@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c72kxq1rgbfp"]
+[gd_scene load_steps=5 format=3 uid="uid://c72kxq1rgbfp"]
 
 [ext_resource type="Texture2D" uid="uid://bkl1e8oqrycct" path="res://assets/Cave Tileset/Scaffolding_and_BG_Parts (16 x 16).png" id="1_6h4um"]
 [ext_resource type="Script" uid="uid://ui1x223njq7d" path="res://scripts/moving_plataform.gd" id="1_kielb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kielb"]
 size = Vector2(12, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqqyq"]
+size = Vector2(0.5, 8.5)
 
 [node name="movingPlatform" type="Node2D"]
 scale = Vector2(2, 2)
@@ -22,3 +25,11 @@ region_rect = Rect2(167, 163, 18, 14)
 light_mask = 2
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_kielb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="platform"]
+position = Vector2(-5.75, -0.25)
+shape = SubResource("RectangleShape2D_kqqyq")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="platform"]
+position = Vector2(5.5, 0)
+shape = SubResource("RectangleShape2D_kqqyq")
