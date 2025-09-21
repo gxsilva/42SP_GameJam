@@ -991,7 +991,7 @@ tile_set = SubResource("TileSet_3akcx")
 
 [node name="hit_pop" type="Area2D" parent="popup"]
 script = ExtResource("10_3knxq")
-dialog_text = Array[String](["Red Hood vivia em paz junto ao seu povo, ", "até que um bando de orcs descobriu as cavernas", "e decidiu transformá-las em sua fortaleza.", "Agora, a escuridão toma conta do lugar que", "antes era lar e refúgio.", "Cabe a você, Red Hood, atravessar", "os túneis infestados, enfrentar hordas", "de inimigos e retomar aquilo que foi roubado."])
+dialog_text = Array[String](["Red Hood vivia em paz junto ao seu povo,", "ate que um bando de orcs descobriu as cavernas", "e decidiu transforma-las em sua fortaleza.", "Agora, a escuridao toma conta do lugar que", "antes era lar e refugio.", "Cabe a voce, Red Hood, atravessar", "os tuneis infestados, enfrentar hordas", "de inimigos e retomar aquilo que foi roubado."])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="popup/hit_pop"]
 position = Vector2(40.5, -19)

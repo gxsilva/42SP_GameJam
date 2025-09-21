@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://6kpekja5d5su"]
+[gd_scene load_steps=24 format=3 uid="uid://6kpekja5d5su"]
 
 [ext_resource type="Texture2D" uid="uid://c6odbdtbooyhj" path="res://assets/Cave Tileset/Brown_Tile_Terrain (16 x 16).png" id="1_3a8fg"]
 [ext_resource type="Texture2D" uid="uid://cywl8mpsm88vw" path="res://assets/Cave Tileset/Gray_Tile_Terrain (16 x 16).png" id="2_tm14p"]
@@ -9,14 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://cdwebnbd0q0s2" path="res://assets/Parallax Cave/Parallax Cave/3fx.png" id="7_vk2oj"]
 [ext_resource type="Texture2D" uid="uid://dom5vjjaikuql" path="res://assets/Parallax Cave/Parallax Cave/4.png" id="8_fg1jx"]
 [ext_resource type="Texture2D" uid="uid://dfyxqd7hivh2b" path="res://assets/Parallax Cave/Parallax Cave/5.png" id="9_2a7qk"]
-[ext_resource type="Texture2D" uid="uid://0mh8gfavyvag" path="res://assets/Parallax/Cave/6fx.png" id="10_d75as"]
+[ext_resource type="Texture2D" uid="uid://0mh8gfavyvag" path="res://assets/Parallax Cave/Parallax Cave/6fx.png" id="10_d75as"]
 [ext_resource type="Texture2D" uid="uid://c5k4e68vb5o41" path="res://assets/Parallax Cave/Parallax Cave/7.png" id="11_wpdil"]
 [ext_resource type="Texture2D" uid="uid://dbr1gyux31sfa" path="res://assets/Parallax Cave/Parallax Cave/8fx.png" id="12_ne8ba"]
-[ext_resource type="Texture2D" uid="uid://b2yfjqylsb7q3" path="res://assets/Parallax/Cave/9.png" id="13_4n75x"]
+[ext_resource type="Texture2D" uid="uid://b2yfjqylsb7q3" path="res://assets/Parallax Cave/Parallax Cave/9.png" id="13_4n75x"]
 [ext_resource type="Texture2D" uid="uid://bncg8jt0x1p8h" path="res://assets/Parallax Cave/Parallax Cave/dark_node_parallax.png" id="14_4r2ec"]
 [ext_resource type="PackedScene" uid="uid://codtnnyg672ai" path="res://scenes/killzone.tscn" id="17_07hwy"]
 [ext_resource type="PackedScene" uid="uid://kxlxrutf35xi" path="res://scenes/enemy_boss.tscn" id="17_32mrs"]
 [ext_resource type="PackedScene" uid="uid://in13hdpfgr3u" path="res://scenes/hud.tscn" id="18_cc8ci"]
+[ext_resource type="FontFile" uid="uid://cvy6dasr7kmpu" path="res://assets/fonts/Minecraft.ttf" id="18_po02c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfnet"]
 texture = ExtResource("1_3a8fg")
@@ -727,5 +728,15 @@ shape = SubResource("WorldBoundaryShape2D_7t5mc")
 position = Vector2(349, 502)
 scale = Vector2(2.35, 2.35)
 patrol_distance = 75.0
-max_health = 15
+max_health = 1
 attack_cooldown = 1.5
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 270.0
+offset_top = 388.0
+offset_right = 317.0
+offset_bottom = 414.0
+theme_override_fonts/font = ExtResource("18_po02c")
+theme_override_font_sizes/font_size = 25
+text = "End"

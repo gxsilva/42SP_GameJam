@@ -1,6 +1,6 @@
 [gd_scene load_steps=61 format=3 uid="uid://kxlxrutf35xi"]
 
-[ext_resource type="Script" uid="uid://41f0p4cbnlyb" path="res://scripts/enemy.gd" id="1_lujot"]
+[ext_resource type="Script" uid="uid://dmx3hnnwfgqhx" path="res://scenes/enemy_boss_final.gd" id="1_lujot"]
 [ext_resource type="Texture2D" uid="uid://cb28kbkcpa6y5" path="res://assets/sprites/orc3_attack_full.png" id="2_lujot"]
 [ext_resource type="Texture2D" uid="uid://t1f2vr6dxrej" path="res://assets/sprites/orc3_death_full.png" id="3_pxn6j"]
 [ext_resource type="Texture2D" uid="uid://bryyc5285idu5" path="res://assets/sprites/orc3_run_full.png" id="4_1ofvn"]

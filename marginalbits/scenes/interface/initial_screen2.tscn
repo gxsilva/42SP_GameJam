@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4mph0jcgce6r"]
+
+[ext_resource type="Script" uid="uid://oyrfv848vcsi" path="res://initial_screen.gd" id="1_3noki"]
+[ext_resource type="Texture2D" uid="uid://bstcuif7ruol6" path="res://scenes/interface/cave_invader.png" id="2_8h2eb"]
+[ext_resource type="FontFile" uid="uid://cvy6dasr7kmpu" path="res://assets/fonts/Minecraft.ttf" id="3_8h2eb"]
+
+[node name="InitialScreen" type="Node2D"]
+script = ExtResource("1_3noki")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(572, 362)
+scale = Vector2(0.755859, 0.755859)
+texture = ExtResource("2_8h2eb")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 400.0
+offset_right = 197.0
+offset_bottom = 459.0
+theme_override_fonts/font = ExtResource("3_8h2eb")
+theme_override_font_sizes/font_size = 50
+text = "Start"
+
+[node name="Exit" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 528.0
+offset_right = 169.0
+offset_bottom = 587.0
+theme_override_fonts/font = ExtResource("3_8h2eb")
+theme_override_font_sizes/font_size = 50
+text = "Exit"
+
+[connection signal="pressed" from="Control/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/Exit" to="." method="_on_exit_pressed"]
