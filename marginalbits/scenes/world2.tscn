@@ -585,7 +585,7 @@ sources/3 = SubResource("TileSetAtlasSource_4mrxx")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7t5mc"]
 
-[node name="world" type="Node2D"]
+[node name="world2" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(48, 12)
