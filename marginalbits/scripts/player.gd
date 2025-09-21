@@ -3,7 +3,8 @@ extends CharacterBody2D
 const SPEED := 130.0
 const JUMP_VELOCITY := -300.0
 
-#Quanto de controle horizontal você tem enquanto ataca (0 = nenhum, SPEED = total)
+# Quanto de controle horizontal você tem enquanto ataca (0 = nenhum, SPEED = total)
+
 const ATTACK_CONTROL := 40.0
 
 var is_jumping := false
@@ -32,7 +33,10 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction != 0:
 		facing = sign(direction)
-#Ataque: iniciar
+
+
+	# Ataque: iniciar
+
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		is_attacking = true
 		attack_hold_vx = velocity.x   # guarda o embalo atual
