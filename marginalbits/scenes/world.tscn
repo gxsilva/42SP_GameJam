@@ -683,6 +683,8 @@ centered = false
 
 [node name="Player" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(362, 510)
+collision_layer = 2
+collision_mask = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(0, -30)
@@ -694,11 +696,14 @@ limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="Goal" parent="." instance=ExtResource("15_dss4m")]
-position = Vector2(1418, 518)
+position = Vector2(759, 515)
+collision_mask = 2
 next_level = ExtResource("16_7t5mc")
 
 [node name="Killzone" parent="." instance=ExtResource("14_o8fc1")]
 position = Vector2(23, 786)
+collision_layer = 1
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("WorldBoundaryShape2D_dss4m")
